@@ -1,11 +1,18 @@
 <?php
 
-namespace Kernel;
+namespace Vk;
 
 use Exception;
 
 class Api
 {
+    private $accessToken;
+
+    public function setAccessToken(string $accessToken)
+    {
+        $this->accessToken = $accessToken;
+    }
+
     public function messagesSend($peer_id, $message, $attachments = array())
     {
         if (is_array($peer_id)) {
@@ -66,11 +73,11 @@ class Api
 
     public function apiCall($method, $params = array())
     {
-        $params['access_token'] = getenv('VK_API_ACCESS_TOKEN');
-        $params['v'] = getenv('VK_API_VERSION');
+        $params['access_token'] = $this->accessToken ?: getenv('VK_API_ACCESS_TOKEN');
+        $params['v'] = '5.67';
 
         $query = http_build_query($params);
-        $url = getenv('VK_API_ENDPOINT').$method.'?'.$query;
+        $url = 'https://api.vk.com/method/'.$method.'?'.$query;
 
         $curl = curl_init($url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
