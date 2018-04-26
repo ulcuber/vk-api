@@ -5,25 +5,19 @@
 
 ### Usage
 ```php
-use Vk\Api;
+use Vk\Client;
 
-(new Api)->messagesSend($id, $message);
+$response = (new Client)->messages_send(['user_id' => $id, 'message' => $message]);
 ```
+``_`` will replaced with ``.``
 
 ### Methods
-| Method                        | Description                |
-|-------------------------------|----------------------------|
-| setAccessToken                |VK_API_ACCESS_TOKEN         |
-| messagesSend                  |                            |
-| usersGet                      |                            |
-| photosGetMessagesUploadServer |                            |
-| photosSaveMessagesPhoto       |                            |
-| docsGetMessagesUploadServer   |                            |
-| docsSave                      |                            |
-| apiCall                       | Base methods for API calls |
-| upload                        |                            |
+| Method | Description         |
+|--------|---------------------|
+| token  | VK_API_ACCESS_TOKEN |
+| method | 'get', 'post'       |
 
-You can specify VK_API_ACCESS_TOKEN in your .env, if using Dotenv
+You can specify __VK_API_ACCESS_TOKEN__ in your _.env_, if using _Dotenv_
 (Relies on getenv())
 
 # Callback API
